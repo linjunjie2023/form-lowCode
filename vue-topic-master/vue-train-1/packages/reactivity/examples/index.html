@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="../dist/reactivity.global.js"></script>
+    <script>
+
+        // readonly shallowReactive shallowReadnly 
+        const { reactive, effect } = VueReactivity;
+        let obj = { name: 'zf', age: 13 };
+        const state1 = reactive(obj);
+        const state2 = reactive(obj);
+        // 代理对象的问题
+        // console.log(state1 === state2);
+
+        console.log(reactive(state1) === state1)
+
+
+
+
+
+        
+        // effect默认会执行一次
+        // effect(() => { // 稍后属性变化了 会重新执行effect   -》 属性变化了重新渲染页面
+        //     app.innerHTML = state.name + '今年' + state.age + '岁了';
+        // })
+
+        // setTimeout(() => {
+        //     state.age = 20;
+        // }, 3000)
+
+    </script>
+</body>
+
+</html>
