@@ -150,6 +150,7 @@ export default defineComponent({
 
 
         </> : <div class="editor">
+            {/* 左侧物料区 */}
             <div class="editor-left">
                 {/* 根据注册列表 渲染对应的内容  可以实现h5的拖拽*/}
                 {config.componentList.map(component => (
@@ -163,7 +164,8 @@ export default defineComponent({
                         <div>{component.preview()}</div>
                     </div>
                 ))}
-            </div>
+                </div>
+                {/* 顶部工作区 */}
             <div class="editor-top">
                 {buttons.map((btn, index) => {
                     const icon = typeof btn.icon == 'function' ? btn.icon() : btn.icon
@@ -173,7 +175,8 @@ export default defineComponent({
                         <span>{label}</span>
                     </div>
                 })}
-            </div>
+                </div>
+                {/* 右侧属性 */}
             <div class="editor-right">
                 <EditorOperator
                     block={lastSelectBlock.value}
