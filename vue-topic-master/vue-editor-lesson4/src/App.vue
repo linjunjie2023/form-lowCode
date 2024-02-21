@@ -6,9 +6,9 @@
 
 <script>
 import { ref, provide } from "vue";
-import data from "./data.json";
-import Editor from "./packages/editor";
-import { registerConfig as config } from "./utils/editor-config";
+import data from "./data.json"; //data是编辑器的数据
+import Editor from "./packages/editor"; //编辑器组件，App组件下就是它
+import { registerConfig as config } from "./utils/editor-config"; //目前，里面有组件的配置
 import Range from "./components/Range.jsx";
 export default {
   components: {
@@ -17,7 +17,7 @@ export default {
   },
   setup() {
     const state = ref(data);
-    provide("config", config); // 将组件的配置直接传值，提供出去
+    provide("config", config); // 将组件的配置直接传值，供其他组件使用
 
     const formData = ref({
       username: "zfjg",

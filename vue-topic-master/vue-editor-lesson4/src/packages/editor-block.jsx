@@ -29,8 +29,6 @@ export default defineComponent({
             // 通过block的key属性直接获取对应的组件 
             const component = config.componentMap[props.block.key];
             // 获取render函数
-
-
             const RenderComponent = component.render({
                 size: props.block.hasResize ? { width: props.block.width, height: props.block.height } : {},
                 props: props.block.props,
