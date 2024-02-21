@@ -36,7 +36,7 @@ export default defineComponent({
 
         const config = inject('config');
 
-        const containerRef = ref(null);
+        const containerRef = ref(null); //获取ref
         // 1.实现菜单的拖拽功能
         const { dragstart, dragend } = useMenuDragger(containerRef, data);
 
@@ -151,7 +151,9 @@ export default defineComponent({
 
         </> : <div class="editor">
             <div class="editor-left">
-                {/* 根据注册列表 渲染对应的内容  可以实现h5的拖拽*/}
+                    {/* 根据注册列表 渲染对应的内容  可以实现h5的拖拽*/}
+                    {/* 要加个html5自带属性draggable，加了就能拖动 */}
+                    {/* 获取componentList,然后渲染每一项 */}
                 {config.componentList.map(component => (
                     <div
                         class="editor-left-item"
@@ -159,6 +161,9 @@ export default defineComponent({
                         onDragstart={e => dragstart(e, component)}
                         onDragend={dragend}
                     >
+                        {/* dragstart 开始拖拽的函数,e 事件源
+                            dragend 拖拽结束的函数                        
+                        */}
                         <span>{component.label}</span>
                         <div>{component.preview()}</div>
                     </div>

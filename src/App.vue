@@ -1,19 +1,23 @@
 <template>
   <div class="app">
-    <Editor :data="state"></Editor>
+    <Editor v-model="state"></Editor>
   </div>
 </template>
 
 <script>
-import data from "./data.json";
-import { ref } from "vue";
-import Editor from "./packages/editor.jsx";
+import data from "./data.json"
+import { ref } from "vue"
+import Editor from "./packages/editor.jsx"
 export default {
   components: {
     Editor,
   },
-  setup() {
-    const state = ref(data);
+  setup () {
+    const state = ref(data)
+
+    return {
+      state
+    }
   },
 };
 </script>

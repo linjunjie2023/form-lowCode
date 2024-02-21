@@ -11,7 +11,7 @@ export default defineComponent({
             left: `${props.block.left}px`,
             zIndex: `${props.block.zIndex}`
         }));
-        const config = inject('config');
+        const config = inject('config');  //获取。vue3的这个是响应式的。
 
         const blockRef = ref(null)
         onMounted(() => {

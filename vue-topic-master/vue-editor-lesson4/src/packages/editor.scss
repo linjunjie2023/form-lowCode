@@ -39,6 +39,7 @@
             }
 
             &::after {
+                /*物料区的不让有反应*/
                 content: '';
                 position: absolute;
                 top: 0;

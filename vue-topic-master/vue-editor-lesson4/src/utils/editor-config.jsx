@@ -4,14 +4,14 @@ import { ElButton, ElInput, ElOption, ElSelect } from 'element-plus'
 import Range from '../components/Range'
 
 function createEditorConfig() {
-    const componentList = [];
-    const componentMap = {}
+    const componentList = []; //组件列表，放组件的。左侧的物料区列表
+    const componentMap = {} // 组件映射表，中间的内容区列表
 
     return {
         componentList,
         componentMap,
         register: (component) => {
-            componentList.push(component);
+            componentList.push(component); //下面调用一次方法，就会放入一个组件信息
             componentMap[component.key] = component;
         }
     }
@@ -22,6 +22,10 @@ const createColorProp = (label) => ({ type: 'color', label });
 const createSelectProp = (label, options) => ({ type: 'select', label, options })
 const createTableProp = (label, table) => ({ type: 'table', label, table })
 
+/** 一个组件一个这个？
+ * 因为：每个组件的属性是有差别的，有的有字数统计属性，有的没有。每个组件的配置不一样
+ * 所以，最好是一个一个写。
+ */
 registerConfig.register({
     label: '下拉框',
     preview: () => <ElSelect modelValue=""></ElSelect>,
