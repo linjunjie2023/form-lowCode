@@ -1,7 +1,7 @@
 import { computed, defineComponent, inject, ref } from "vue";
 import './editor.scss'
 import EditorBlock from './editor-block'
-import deepcopy from "deepcopy";
+import deepcopy from "deepcopy";  //深拷贝
 import { useMenuDragger } from "./useMenuDragger";
 import { useFocus } from "./useFocus";
 import { useBlockDragger } from "./useBlockDragger";
@@ -12,9 +12,12 @@ import EditorOperator from "./editor-operator";
 import { ElButton } from "element-plus";
 export default defineComponent({
     props: {
-        modelValue: { type: Object },
-        formData: { type: Object }
+        modelValue: { type: Object },//包含编辑器数据的对象，
+        formData: { type: Object }  //formData是包含编辑器中组件的元数据对象。
     },
+    /**emits 选项
+     * update:modelValue是自定义事件，当data属性的值发生变化时，组件将会触发该事件。父组件可以通过监听该事件来更新data属性的值。
+     */
     emits: ['update:modelValue'], // 要触发的时间
     setup(props, ctx) {
         // 预览的时候 内容不能在操作了 ，可以点击 输入内容 方便看效果
@@ -26,7 +29,7 @@ export default defineComponent({
                 return props.modelValue
             },
             set(newValue) {
-                ctx.emit('update:modelValue', deepcopy(newValue))
+                ctx.emit('update:modelValue', deepcopy(newValue)) //派发事件
             }
         });
         const containerStyles = computed(() => ({
@@ -34,7 +37,7 @@ export default defineComponent({
             height: data.value.container.height + 'px'
         }))
 
-        const config = inject('config');
+        const config = inject('config'); //接收传过来的数据
 
         const containerRef = ref(null); //获取ref
         // 1.实现菜单的拖拽功能

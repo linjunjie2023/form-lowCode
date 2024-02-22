@@ -2,33 +2,34 @@ import {events} from './events';
 export function useMenuDragger(containerRef, data) {
     // currentComponent 用于drop时，知道是什么组件
     let currentComponent = null;
+
     /**
-     * @function dragenter 进入
-     * @param {*} e 
+     * 
+     * 所选代码拖放事件的函数的一部分。
+     * 它将拖动效果设置为“移动”，这是HTML5拖放的默认拖动效果。
+     * 这意味着当用户将元素拖到拖放目标上时，将出现一个图标，指示可以将元素拖放到目标中。
      */
     const dragenter = (e) => {
         //拖动类型
         e.dataTransfer.dropEffect = 'move'; // h5拖动的图标 move
     }
-        /**
-     * @function dragover 进入
-     * @param {*} e 
+
+    /*
+    当一个元素被拖到另一个元素上时触发拖移事件。在这种情况下，它用于防止默认行为，
+    如果没有preventDefault调用，元素将被阻止放到目标元素上
      */
     const dragover = (e) => {
         e.preventDefault();
     }
-     /**
-     * @function dragleave 离开
-     * @param {*} e 
+
+    /**
+     * 离开的时候，图标改变
      */
     const dragleave = (e) => {
         e.dataTransfer.dropEffect = 'none';
     }
-         /**
-     * @function drop 松手
-     * @param {*} e 
-     */
-    const drop = (e) => {
+
+const drop = (e) => {
         // 先留在这
         let blocks =  data.value.blocks; // 内部已经渲染的组件
         data.value = {...data.value,blocks:[
@@ -57,6 +58,10 @@ export function useMenuDragger(containerRef, data) {
         currentComponent = component  //开始的时候，赋值了为操作的那个组件，component
         events.emit('start'); // 发布start
     }
+    
+    /**
+    离开后移除事件
+     */
     const dragend = (e)=>{
         containerRef.value.removeEventListener('dragenter', dragenter)
         containerRef.value.removeEventListener('dragover', dragover)

@@ -6,6 +6,7 @@ export default defineComponent({
         formData: { type: Object }
     },
     setup(props) {
+        //这样blockStyles也是会动态更新的
         const blockStyles = computed(() => ({
             top: `${props.block.top}px`,
             left: `${props.block.left}px`,
@@ -13,7 +14,11 @@ export default defineComponent({
         }));
         const config = inject('config');  //获取。vue3的这个是响应式的。
 
-        const blockRef = ref(null)
+    /** 
+     * ref函数用于创建一个引用，该引用可以用来访问组件实例关联的DOM元素。
+     * 在本例中，我们将引用存储在一个名为blockRef的变量中，该变量将在稍后用于修改块在编辑器中的位置或大小。
+     */
+    const blockRef = ref(null)  
         onMounted(() => {
             let { offsetWidth, offsetHeight } = blockRef.value;
             if (props.block.alignCenter) { // 说明是拖拽松手的时候才渲染的，其他的默认渲染到页面上的内容不需要居中
