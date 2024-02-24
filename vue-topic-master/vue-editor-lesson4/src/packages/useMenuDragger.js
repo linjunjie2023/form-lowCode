@@ -11,7 +11,7 @@ export function useMenuDragger(containerRef, data) {
      */
     const dragenter = (e) => {
         //拖动类型
-        e.dataTransfer.dropEffect = 'move'; // h5拖动的图标 move
+        e.dataTransfer.dropEffect = 'move'; //dropEffect  h5拖动的图标 move
     }
 
     /*
@@ -23,15 +23,17 @@ export function useMenuDragger(containerRef, data) {
     }
 
     /**
-     * 离开的时候，图标改变
+     * 离开的时候，图标改变，改为禁用标识
      */
     const dragleave = (e) => {
         e.dataTransfer.dropEffect = 'none';
     }
-
+        /**
+     * 松手的时候，根据拖拽的组件，添加一个组件
+     */
 const drop = (e) => {
         // 先留在这
-        let blocks =  data.value.blocks; // 内部已经渲染的组件
+        let blocks =  data.value.blocks; // 内部原有已经渲染的组件
         data.value = {...data.value,blocks:[
             ...blocks,
             {
@@ -43,7 +45,19 @@ const drop = (e) => {
                 props:{},
                 model:{}
             }
-        ]}
+    ]
+    }
+    /** 
+     * 这是新增的组件信息
+     * {
+                top:e.offsetY,
+                left:e.offsetX,
+                zIndex:1,
+                key:currentComponent.key,
+                alignCenter:true, // 希望松手的时候你可以居中
+                props:{},
+                model:{}
+            } */
         currentComponent = null;
     }
     const dragstart = (e, component) => {

@@ -24,7 +24,7 @@ export default defineComponent({
             if (props.block.alignCenter) { // 说明是拖拽松手的时候才渲染的，其他的默认渲染到页面上的内容不需要居中
                 props.block.left = props.block.left - offsetWidth / 2;
                 props.block.top = props.block.top - offsetHeight / 2; // 原则上重新派发事件
-                props.block.alignCenter = false; // 让渲染后的结果才能去居中
+                props.block.alignCenter = false; //居中完置为false，下次的不会居中。让渲染后的结果才能去居中
             }
             props.block.width = offsetWidth;
             props.block.height = offsetHeight;

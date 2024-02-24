@@ -2,8 +2,8 @@ import { computed, defineComponent, inject, ref } from "vue";
 import './editor.scss'
 import EditorBlock from './editor-block.jsx' 
 import deepcopy from "deepcopy"; //深拷贝
-import { useMenuDragger } from "./useMenuDragger";
-import { useFocus } from "./useFocus";
+import { useMenuDragger } from "./useMenuDragger"; //实现菜单的拖拽功能
+import { useFocus } from "./useFocus";  //内部的拖拽
 import { useBlockDragger } from "./useBlockDragger";
 import { useCommand } from "./useCommand";
 import { $dialog } from "../components/Dialog";
@@ -41,7 +41,7 @@ export default defineComponent({
 
         const containerRef = ref(null); //获取ref
         // 1.实现菜单的拖拽功能,封装成了钩子函数
-        const { dragstart, dragend } = useMenuDragger(containerRef, data);
+        const { dragstart, dragend } = useMenuDragger(containerRef, data); //渲染好后，会传进去
 
         // 2.实现获取焦点 选中后可能直接就进行拖拽了
         let { blockMousedown, focusData, containerMousedown, lastSelectBlock, clearBlockFocus } = useFocus(data, previewRef, (e) => {
@@ -204,8 +204,9 @@ export default defineComponent({
                         style={containerStyles.value}
                         ref={containerRef}
                         onMousedown={containerMousedown}
-
-                    >
+  
+                        >        
+                    {/* ref 获取内容区的dom元素 */}
                         {
                             (data.value.blocks.map((block, index) => (
                                 <EditorBlock
